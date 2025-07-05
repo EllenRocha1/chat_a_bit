@@ -22,8 +22,17 @@ def alerta_personalizado(titulo, msg):
     popup.title(titulo)
     popup.geometry("300x150")
     label = ctk.CTkLabel(popup, text=msg, font=ctk.CTkFont(size=14))
-    label.pack(pady=20)
-    botao_ok = ctk.CTkButton(popup, text="OK", command=popup.destroy)
+    label.pack(pady=15)
+
+    img_gato = Image.open("assets/icone_gato.png")
+    img_gato = img_gato.resize((60, 60))
+    img_gato_tk = ImageTk.PhotoImage(img_gato)
+
+    label_img = ctk.CTkLabel(popup, image=img_gato_tk, text="")
+    label_img.image = img_gato_tk
+    label_img.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
+
+    botao_ok = ctk.CTkButton(popup, text="OK",corner_radius=10, fg_color=roxo, hover_color=rosa_escuro, command=popup.destroy)
     botao_ok.pack(pady=10)
     popup.grab_set() 
 
@@ -92,6 +101,33 @@ def abrir_cadastro():
                                   command=lambda: [cadastro.destroy(), app.deiconify()])
     botao_voltar.grid(row=5, column=0, columnspan=2, pady=(0, 20))
 
+def fazer_login():
+    usuario = entrada_usuario.get()
+    senha = entrada_senha.get()
+
+    if not usuario or not senha:
+        alerta_personalizado("Erro", "Preencha usuário e senha.")
+        return
+
+    try:
+        if verificar_login(usuario, senha):
+            alerta_personalizado("Sucesso", f"Bem-vindo(a), {usuario}!")
+            app.destroy()
+        else:
+            alerta_personalizado("Erro", "Usuário ou senha inválidos.")
+    except Exception as e:
+        alerta_personalizado("Erro", f"Erro ao tentar fazer login: {e}")
+    
+    resultado = verificar_login(usuario, senha)
+
+    if resultado is True:
+        alerta_personalizado("Sucesso", f"Bem-vindo(a), {usuario}!")
+        app.destroy()
+    elif resultado == "senha_incorreta":
+        alerta_personalizado("Erro", "Senha incorreta.")
+    elif resultado == "usuario_nao_encontrado":
+        alerta_personalizado("Erro", "Usuário não encontrado.")
+
 
 imagem_logo = Image.open("assets/chat_a_bit_login_fundo.png")
 imagem_logo_fundo = imagem_logo.resize((540, 540))
@@ -115,7 +151,7 @@ campo_senha.grid(row=1, column=0, padx=10, pady=10, sticky="e")
 entrada_senha = ctk.CTkEntry(frame, show="*", width=200)
 entrada_senha.grid(row=1, column=1, padx=10, pady=10)
 
-botao_login = ctk.CTkButton(frame, text="Entrar", width=200, corner_radius=10, fg_color=amarelo, hover_color= roxo, text_color= roxo)
+botao_login = ctk.CTkButton(frame, text="Entrar", width=200, corner_radius=10, fg_color=amarelo, hover_color= roxo, text_color= roxo, command= fazer_login)
 botao_login.grid(row=2, column=0, columnspan=2, padx=10, pady=(20, 20))
 
 campo_cadastre = ctk.CTkLabel(frame, text="Não tem uma conta?")

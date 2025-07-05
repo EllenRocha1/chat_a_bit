@@ -1,4 +1,5 @@
 import psycopg2
+import bcrypt
 from config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 def conectar():
@@ -42,21 +43,20 @@ def inserir_usuario(nome, usuario, senha):
         print("Erro ao inserir:", e)
         return False
 
-def verificar_login(usuario, senha):
-    try:
-        conn = conectar()
-        cur = conn.cursor()
-        cur.execute("SELECT senha FROM usuarios WHERE usuario = %s", (usuario,))
-        resultado = cur.fetchone()
-        cur.close()
-        conn.close()
+def verificar_login(usuario, senha_digitada):
+    conn = conectar()
+    cur = conn.cursor()
 
-        if resultado is None:
-            return False  # Usuário não existe
+    cur.execute("SELECT senha FROM usuarios WHERE usuario = %s", (usuario,))
+    resultado = cur.fetchone()
 
-        senha_no_banco = resultado[0]
-        return senha == senha_no_banco  
+    cur.close()
+    conn.close()
 
-    except Exception as e:
-        print("Erro no login:", e)
-        return False
+    if resultado:
+        senha_hash = resultado[0]
+        if bcrypt.checkpw(senha_digitada.encode(), senha_hash.encode()):
+            return True
+        else:
+            return "senha_incorreta"
+    return "usuario_nao_encontrado"
