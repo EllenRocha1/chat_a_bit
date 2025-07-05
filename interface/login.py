@@ -3,9 +3,6 @@ from PIL import Image, ImageTk
 from database import inserir_usuario, verificar_login
 import bcrypt
 
-# # Para verificar:
-# bcrypt.checkpw(senha_digitada.encode(), senha_hash_armazenada.encode())
-
 ctk.set_appearance_mode("dark")
 
 amarelo = "#ffdf61"
@@ -159,6 +156,5 @@ campo_cadastre.grid(row=3, column=0, columnspan=2, pady=(10, 5))
 
 botao_cadastre = ctk.CTkButton(frame, text="Cadastre-se", width=150, corner_radius=10, fg_color=rosa_escuro, hover_color=amarelo, command=abrir_cadastro)      
 botao_cadastre.grid(row=4, column=0, columnspan=2, pady=(0, 20))
-
 
 app.mainloop()
