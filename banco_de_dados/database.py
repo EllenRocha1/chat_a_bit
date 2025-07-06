@@ -1,6 +1,6 @@
 import psycopg2
 import bcrypt
-from config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
+from config.config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 def conectar():
     return psycopg2.connect(
