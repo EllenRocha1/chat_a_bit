@@ -16,7 +16,6 @@ class ChatClient:
         self.destinatario_atual = None
     
     def conectar(self):
-        """Conecta ao servidor e inicia a thread para receber mensagens."""
         try:
             self.socket.connect((HOST, PORT))
             login_msg = {'tipo': 'login', 'usuario': self.usuario}
@@ -31,7 +30,6 @@ class ChatClient:
             return False
 
     def receber_mensagens(self):
-        """Executada em uma thread separada para escutar continuamente por mensagens do servidor."""
         buffer = ""
         while self.conectado:
             try:
@@ -66,7 +64,6 @@ class ChatClient:
         print("Thread de recebimento de mensagens encerrada.")
 
     def processar_mensagem(self, mensagem):
-        """Processa uma mensagem recebida do servidor e chama a função de UI apropriada."""
         tipo_msg = mensagem.get('tipo')
         
         if tipo_msg == 'mensagem':
@@ -92,7 +89,6 @@ class ChatClient:
                 self.interface.after(0, lambda r=remetente: self.interface.mostrar_indicador_digitando(r))
 
     def enviar_mensagem(self, destinatario, conteudo):
-        """Constrói uma mensagem JSON e a envia para o servidor."""
         if not self.conectado:
             alerta_personalizado("Erro", "Não conectado ao servidor")
             return
@@ -109,7 +105,6 @@ class ChatClient:
             print(f"Erro ao enviar mensagem: {e}")
 
     def selecionar_destinatario(self, nome):
-        """Define o destinatário atual e solicita o histórico de conversa."""
         if nome == self.destinatario_atual:
             return
 
@@ -127,7 +122,6 @@ class ChatClient:
                 print(f"Erro ao solicitar histórico: {e}")
 
     def solicitar_lista_usuarios(self):
-        """Solicita a lista de usuários ao servidor."""
         if self.conectado:
             mensagem = {
                 'tipo': 'solicitacao', 'acao': 'listar_usuarios', 'usuario': self.usuario
@@ -138,7 +132,6 @@ class ChatClient:
                 print(f"Erro ao solicitar lista de usuários: {e}")
 
     def enviar_status_digitando(self):
-        """Envia o status 'digitando' para o destinatário atual."""
         if not self.conectado or not self.destinatario_atual:
             return
         
@@ -151,7 +144,6 @@ class ChatClient:
             print(f"Erro ao enviar status 'digitando': {e}")
 
     def desconectar(self):
-        """Envia uma mensagem de logout e fecha o socket."""
         if self.conectado:
             self.conectado = False
             try:

@@ -2,7 +2,7 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 from banco_de_dados.database import inserir_usuario, verificar_login
 from utils.mensagens import alerta_personalizado
-from interface.chat import abrir_chat  # Certifique-se que essa é a versão correta integrada
+from interface.chat import abrir_chat
 import bcrypt
 
 def criar_tela_login(app):

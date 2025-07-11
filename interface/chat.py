@@ -1,6 +1,5 @@
 import customtkinter as ctk
 from PIL import Image
-# Importe CTkImage para um melhor dimensionamento de imagem e para remover os avisos
 from customtkinter import CTkImage 
 import os
 from datetime import datetime
@@ -94,19 +93,16 @@ def abrir_chat(app, usuario):
             entrada_mensagem.delete(0, 'end')
 
     def tratar_desconexao_inesperada():
-        """Callback para quando o servidor cai. Alerta o usuário e desabilita a UI."""
         alerta_personalizado("Conexão Perdida", "A conexão com o servidor foi encerrada.")
         entrada_mensagem.configure(state="disabled")
         # O último widget no frame inferior é o botão "Enviar"
         campo_inferior.winfo_children()[-1].configure(state="disabled")
 
     def limpar_mensagens():
-        """Remove todas as mensagens da tela para carregar um novo histórico."""
         for widget in mensagens_frame.winfo_children():
             widget.destroy()
 
     def mostrar_indicador_digitando(remetente):
-        """Mostra o indicador 'digitando...' e o esconde após um tempo."""
         if chat.timer_digitando:
             chat.after_cancel(chat.timer_digitando)
         
@@ -115,7 +111,6 @@ def abrir_chat(app, usuario):
         chat.timer_digitando = chat.after(2000, lambda: indicador_digitando_label.configure(text=""))
 
     def exibir_mensagem(remetente, conteudo, timestamp):
-        """Exibe uma única mensagem na tela, formatada para o remetente ou destinatário."""
         def atualizar():
             try:
                 hora = datetime.fromisoformat(timestamp).strftime("%H:%M")
@@ -139,13 +134,11 @@ def abrir_chat(app, usuario):
                                      text_color="white", padx=10, pady=5)
                 label.pack(side="left")
             
-            # Força a rolagem para o final para ver a mensagem mais recente
             mensagens_frame._parent_canvas.yview_moveto(1.0)
         
         chat.after(0, atualizar)
 
     def atualizar_status_usuario(usuario_nome, status):
-        """Atualiza o ícone de status (online/offline) de um usuário na lista."""
         for widget in lista_usuarios.winfo_children():
             if isinstance(widget, ctk.CTkFrame):
                 # O botão é o primeiro filho do frame da linha
@@ -157,8 +150,7 @@ def abrir_chat(app, usuario):
                     break
 
     def atualizar_lista_usuarios(lista):
-        """Reconstrói a lista de usuários na barra lateral."""
-        limpar_mensagens() # Limpa a conversa atual ao atualizar a lista
+        limpar_mensagens()
         for widget in lista_usuarios.winfo_children():
             widget.destroy()
 
@@ -178,7 +170,6 @@ def abrir_chat(app, usuario):
             ctk.CTkLabel(linha, text="•", text_color=status_cor,
                          font=ctk.CTkFont(size=24)).pack(side="right", padx=5)
 
-    # Botão de Enviar
     ctk.CTkButton(campo_inferior, text="Enviar", fg_color=amarelo,
                   text_color=roxo, hover_color=roxo, width=100,
                   command=enviar_mensagem).pack(side="right")

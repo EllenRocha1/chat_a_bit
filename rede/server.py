@@ -28,7 +28,6 @@ def broadcast(mensagem, conexao_excluida=None):
                    pass
 
 def remover_cliente(usuario):
-    """Remove um cliente do dicionário de conectados e notifica os outros."""
     print(f"Tentando remover o cliente '{usuario}'...")
     with clientes_lock:
         if usuario in clientes_conectados:
@@ -46,7 +45,6 @@ def remover_cliente(usuario):
     })
 
 def lidar_com_mensagem(conexao, usuario, mensagem_str):
-    """Processa uma única mensagem JSON de um cliente já logado."""
     try:
         dados = json.loads(mensagem_str)
         tipo_msg = dados.get('tipo')
@@ -56,7 +54,6 @@ def lidar_com_mensagem(conexao, usuario, mensagem_str):
             conteudo = dados.get('conteudo')
             timestamp = dados.get('timestamp')
 
-            # O 'usuario' agora é garantido pela função lidar_com_cliente
             salvar_mensagem_historico(usuario, destinatario, conteudo, timestamp)
             with clientes_lock:
                 if destinatario in clientes_conectados:
@@ -101,40 +98,29 @@ def lidar_com_mensagem(conexao, usuario, mensagem_str):
     except Exception as e:
         print(f"Erro inesperado em lidar_com_mensagem para o usuário {usuario}: {e}")
 
-# Em rede/server.py
 
 def lidar_com_cliente(conexao):
-    """
-    Função principal para cada thread de cliente. Usa um buffer para processar
-    mensagens em streaming, garantindo que o login seja a primeira mensagem válida
-    antes de processar comandos subsequentes.
-    """
     usuario = None
     buffer = ""
     try:
         while True:
-            # Lê dados da conexão e adiciona ao buffer
             dados = conexao.recv(2048).decode('utf-8')
             if not dados:
                 break  # Conexão fechada pelo cliente
             
             buffer += dados
 
-            # Processa o buffer enquanto houver linhas completas (terminadas em \n)
             while '\n' in buffer:
                 linha, buffer = buffer.split('\n', 1)
                 if not linha.strip():
                     continue
 
-                # --- LÓGICA DE ESTADO: LOGIN OU MENSAGEM NORMAL ---
                 if not usuario:
-                    # Se o usuário ainda não está logado, esta DEVE ser a mensagem de login
                     try:
                         dados_login = json.loads(linha)
                         if dados_login.get('tipo') == 'login' and dados_login.get('usuario'):
                             usuario = dados_login.get('usuario')
 
-                            # --- AÇÕES EXECUTADAS APENAS NO LOGIN ---
                             with clientes_lock:
                                 clientes_conectados[usuario] = {'conexao': conexao, 'status': 'online'}
                             print(f"Usuário '{usuario}' logado com sucesso de {conexao.getpeername()}.")
@@ -148,14 +134,12 @@ def lidar_com_cliente(conexao):
 
                             broadcast({'tipo': 'status', 'usuario': usuario, 'status': 'online'})
                         else:
-                            # Se a primeira mensagem não for um login válido, encerra a conexão.
                             print(f"Cliente enviou dados inválidos antes do login: {linha}. Desconectando.")
-                            return # Sai da função, o 'finally' fará a limpeza.
+                            return 
                     except json.JSONDecodeError:
                         print(f"Cliente enviou JSON inválido antes do login: {linha}. Desconectando.")
                         return
                 else:
-                    # Se o usuário já está logado, processa a mensagem normalmente
                     lidar_com_mensagem(conexao, usuario, linha)
 
     except ConnectionResetError:
