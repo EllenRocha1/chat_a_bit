@@ -53,9 +53,6 @@ def abrir_chat(app, usuario):
     ctk.CTkButton(barra_superior, text="Sair", width=70, height=30, fg_color=amarelo,
                   text_color=roxo, hover_color=rosa_escuro, command=fechar_janela).pack(side="right", padx=10, pady=5)
 
-    ctk.CTkButton(barra_superior, text="Conta", width=70, height=30, fg_color=amarelo,
-                  text_color=roxo, hover_color=rosa_escuro).pack(side="right", padx=10, pady=5)
-
     corpo = ctk.CTkFrame(chat, fg_color="transparent")
     corpo.pack(fill="both", expand=True)
 
