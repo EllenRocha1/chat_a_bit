@@ -111,28 +111,6 @@ def verificar_login(usuario, senha_digitada):
             return "senha_incorreta"
     return "usuario_nao_encontrado"
 
-# def salvar_mensagem_offline(remetente, destinatario, mensagem):
-#     conn = conectar()
-#     cur = conn.cursor()
-#     cur.execute("""
-#         INSERT INTO mensagens_offline (remetente, destinatario, mensagem, timestamp)
-#         VALUES (%s, %s, %s, %s)
-#     """, (remetente, destinatario, mensagem, datetime.now().isoformat()))
-#     conn.commit()
-#     cur.close()
-#     conn.close()
-
-# def carregar_mensagens_offline(usuario):
-#     conn = conectar()
-#     cur = conn.cursor()
-#     cur.execute("SELECT remetente, mensagem, timestamp FROM mensagens_offline WHERE destinatario=%s", (usuario,))
-#     mensagens = cur.fetchall()
-#     cur.execute("DELETE FROM mensagens_offline WHERE destinatario=%s", (usuario,))
-#     conn.commit()
-#     cur.close()
-#     conn.close()
-#     return mensagens
-
 def listar_usuarios():
     conn = conectar()
     cur = conn.cursor()
