@@ -1,5 +1,6 @@
 import customtkinter as ctk 
 from PIL import Image, ImageTk
+from utils.path import resource_path
 
 amarelo = "#ffdf61"
 roxo = "#402456"
@@ -12,7 +13,7 @@ def alerta_personalizado(titulo, msg):
     label = ctk.CTkLabel(popup, text=msg, font=ctk.CTkFont(size=14))
     label.pack(pady=15)
 
-    img_gato = Image.open("assets/icone_gato.png")
+    img_gato = Image.open(resource_path("assets/icone_gato.png"))
     img_gato = img_gato.resize((60, 60))
     img_gato_tk = ImageTk.PhotoImage(img_gato)
 

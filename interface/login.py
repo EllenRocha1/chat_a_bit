@@ -4,6 +4,7 @@ from banco_de_dados.database import inserir_usuario, verificar_login
 from utils.mensagens import alerta_personalizado
 from interface.chat import abrir_chat
 import bcrypt
+from utils.path import resource_path
 
 def criar_tela_login(app):
     amarelo = "#ffdf61"
@@ -16,7 +17,7 @@ def criar_tela_login(app):
         cadastro.title("Cadastro")
         cadastro.geometry("500x600")
 
-        imagem_fundo_cadastro = Image.open("assets/chat_a_bit_cadastro_fundo.png")
+        imagem_fundo_cadastro = Image.open(resource_path("assets/chat_a_bit_cadastro_fundo.png"))
         imagem_fundo_cadastro = imagem_fundo_cadastro.resize((500, 600))
         imagem_fundo_cadastro_tk = ImageTk.PhotoImage(imagem_fundo_cadastro)
 
@@ -87,7 +88,7 @@ def criar_tela_login(app):
         except Exception as e:
             alerta_personalizado("Erro", f"Erro ao tentar fazer login: {e}")
 
-    imagem_logo = Image.open("assets/chat_a_bit_login_fundo.png").resize((540, 540))
+    imagem_logo = Image.open(resource_path("assets/chat_a_bit_login_fundo.png")).resize((540, 540))
     imagem_logo_fundo_tk = ImageTk.PhotoImage(imagem_logo)
 
     fundo_label = ctk.CTkLabel(app, image=imagem_logo_fundo_tk, text="")

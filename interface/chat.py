@@ -1,10 +1,10 @@
 import customtkinter as ctk
 from PIL import Image
 from customtkinter import CTkImage 
-import os
 from datetime import datetime
 from rede.client import ChatClient
 from utils.mensagens import alerta_personalizado
+from utils.path import resource_path
 
 
 def abrir_chat(app, usuario):
@@ -17,7 +17,7 @@ def abrir_chat(app, usuario):
     chat.geometry("1000x700")
     chat.resizable(False, False)
 
-    caminho_cursor = os.path.abspath("assets/cursor.cur").replace("\\", "/")
+    caminho_cursor = resource_path("assets/cursor.cur").replace("\\", "/")
     chat.configure(cursor=f"@{caminho_cursor}")
 
     chat.timer_digitando = None
@@ -41,8 +41,8 @@ def abrir_chat(app, usuario):
 
     try:
         imagem_logo_ctk = CTkImage(
-            light_image=Image.open("assets/chat_a_bit_logo.png"),
-            dark_image=Image.open("assets/chat_a_bit_logo.png"),
+            light_image=Image.open(resource_path("assets/chat_a_bit_logo.png")),
+            dark_image=Image.open(resource_path("assets/chat_a_bit_logo.png")),
             size=(70, 50)
         )
         label_logo = ctk.CTkLabel(barra_superior, image=imagem_logo_ctk, text="")
@@ -92,7 +92,6 @@ def abrir_chat(app, usuario):
     def tratar_desconexao_inesperada():
         alerta_personalizado("Conexão Perdida", "A conexão com o servidor foi encerrada.")
         entrada_mensagem.configure(state="disabled")
-        # O último widget no frame inferior é o botão "Enviar"
         campo_inferior.winfo_children()[-1].configure(state="disabled")
 
     def limpar_mensagens():
