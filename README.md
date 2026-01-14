@@ -1,7 +1,13 @@
-# Chat a Bit
+<p align="center">
+  <img src="./assets/logo.png" alt="Chat a Bit Logo" width="140">
+</p>
 
-Chat a Bit é uma aplicação de mensagens instantâneas baseada em arquitetura **cliente-servidor**, desenvolvida como projeto acadêmico para a disciplina de **Redes de Computadores** da **UFRPE**.  
-O sistema utiliza **sockets TCP** para comunicação em tempo real, com autenticação segura, persistência em banco de dados e interface gráfica desktop.
+<h1 align="center">Chat a Bit</h1>
+
+<p align="center">
+  Chat a Bit é uma aplicação de mensagens instantâneas baseada em arquitetura <strong>cliente-servidor</strong>, desenvolvida como projeto acadêmico para a disciplina de <strong>Redes de Computadores</strong> da <strong>UFRPE</strong>.<br>
+  O sistema utiliza <strong>sockets TCP</strong> para comunicação em tempo real, com autenticação segura, persistência em banco de dados e interface gráfica desktop.
+</p>
 
 ---
 
