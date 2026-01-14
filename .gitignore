@@ -1,3 +1,14 @@
 config.py
 /banco_de_dados/__pycache__
 /config/__pycache__
+
+# Arquivos do Python (Byte-compiled)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller (Arquivos gerados na compilação)
+build/
+dist/
+*.spec
+_pyi_splash_*.py
