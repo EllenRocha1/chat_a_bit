@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="./assets/logo.png" alt="Chat a Bit Logo" width="140">
+  <img src="./assets/chat_a_bit_logo.png" alt="Chat a Bit Logo" width="140">
 </p>
-
-<h1 align="center">Chat a Bit</h1>
 
 <p align="center">
   Chat a Bit é uma aplicação de mensagens instantâneas baseada em arquitetura <strong>cliente-servidor</strong>, desenvolvida como projeto acadêmico para a disciplina de <strong>Redes de Computadores</strong> da <strong>UFRPE</strong>.<br>
@@ -13,12 +11,13 @@
 
 ## Tecnologias Utilizadas
 
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-4169E1?logo=postgresql&logoColor=white)
-![Sockets](https://img.shields.io/badge/TCP%20Sockets-Networking-blue)
-![CustomTkinter](https://img.shields.io/badge/CustomTkinter-GUI-darkgreen)
-![PyInstaller](https://img.shields.io/badge/PyInstaller-Build-lightgrey)
-![bcrypt](https://img.shields.io/badge/bcrypt-Security-critical)
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=python,postgresql&theme=light" /><br><br>
+  <img src="https://img.shields.io/badge/TCP%20Sockets-Networking-0A66C2" />
+  <img src="https://img.shields.io/badge/CustomTkinter-GUI-2E7D32" />
+  <img src="https://img.shields.io/badge/PyInstaller-Build-6E6E6E" />
+  <img src="https://img.shields.io/badge/bcrypt-Security-B71C1C" />
+</p>
 
 ---
 
@@ -106,6 +105,7 @@ python main.py
 
 ## Para gerar um executável único com suporte a recursos internos e Splash Screen:
 
+```powershell
 pyinstaller --noconfirm --onefile --windowed `
 --name "Chat a Bit" `
 --icon "assets/icone_gato.ico" `
@@ -117,7 +117,7 @@ pyinstaller --noconfirm --onefile --windowed `
 --add-data "rede;rede" `
 --add-data "utils;utils" `
 "main.py"
-
+```
 
 O executável final será gerado na pasta dist/.
 
@@ -125,5 +125,7 @@ O executável final será gerado na pasta dist/.
 ### Autoria
 
 Desenvolvido por Ellen Rocha
-Engenharia da Computação – UFRPE
+<p align="right">
+  <img src="./assets/icone_gato.png" alt="Chat a Bit Cat" width="80">
+</p>
 
