@@ -58,6 +58,7 @@
 
 ## Estrutura do Projeto
 
+```plaintext
 chat_a_bit/
 ├── assets/             # Recursos visuais (ícones, imagens, cursores)
 ├── banco_de_dados/     # Scripts de criação e conexão com PostgreSQL
@@ -65,8 +66,8 @@ chat_a_bit/
 ├── interface/          # Janelas e componentes da interface gráfica
 ├── rede/               # Implementação de sockets (cliente e servidor)
 ├── utils/              # Funções auxiliares e tratamento de caminhos
-└── main.py             # Ponto de entrada da aplicação cliente 
-
+└── main.py             # Ponto de entrada da aplicação cliente
+```
 
 ## Instalação e Execução
 
@@ -77,33 +78,38 @@ chat_a_bit/
 
 ---
 ## Clonar o repositório
+```bash
+
 git clone https://github.com/EllenRocha1/chat_a_bit.git
 cd chat_a_bit
-
+```
 ### Instalar dependências
+```bash
 pip install -r requirements.txt
-
+```
 ## Configurar o banco de dados
 
 ### Execute o script de criação das tabelas:
-
+```bash
 python -m banco_de_dados.criar_banco
-
+```
 
 ### Configure as credenciais do PostgreSQL em:
-
+```bash
 config/config.py
-
+```
 ## Execução
 ### Iniciar o servidor
+```bash
 python rede/server.py
-
+```
 ### Iniciar o cliente (interface gráfica)
+```bash
 python main.py
+```
+## Compilação (Executável)
 
-### Compilação (Executável)
-
-## Para gerar um executável único com suporte a recursos internos e Splash Screen:
+### Para gerar um executável único com suporte a recursos internos e Splash Screen:
 
 ```powershell
 pyinstaller --noconfirm --onefile --windowed `
