@@ -46,13 +46,13 @@
 ## Demonstração da Interface
 
 ### Tela de Login
-![Tela de Login](./login.png)
+![Tela de Login](./assets/login.png)
 
 ### Tela de Cadastro
-![Tela de Cadastro](./cadastro.png)
+![Tela de Cadastro](./assets/cadastro.png)
 
 ### Chat Principal
-![Chat Principal](./conversa.png)
+![Chat Principal](./assets/conversa.png)
 
 ---
 
