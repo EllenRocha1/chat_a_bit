@@ -53,7 +53,6 @@ O sistema utiliza **sockets TCP** para comunicação em tempo real, com autentic
 
 ## Estrutura do Projeto
 
-```plaintext
 chat_a_bit/
 ├── assets/             # Recursos visuais (ícones, imagens, cursores)
 ├── banco_de_dados/     # Scripts de criação e conexão com PostgreSQL
@@ -61,4 +60,64 @@ chat_a_bit/
 ├── interface/          # Janelas e componentes da interface gráfica
 ├── rede/               # Implementação de sockets (cliente e servidor)
 ├── utils/              # Funções auxiliares e tratamento de caminhos
-└── main.py             # Ponto de entrada da aplicação cliente
+└── main.py             # Ponto de entrada da aplicação cliente 
+
+
+## Instalação e Execução
+
+### Pré-requisitos
+
+- Python 3.10 ou superior  
+- PostgreSQL ativo e configurado  
+
+---
+## Clonar o repositório
+git clone https://github.com/EllenRocha1/chat_a_bit.git
+cd chat_a_bit
+
+### Instalar dependências
+pip install -r requirements.txt
+
+## Configurar o banco de dados
+
+### Execute o script de criação das tabelas:
+
+python -m banco_de_dados.criar_banco
+
+
+### Configure as credenciais do PostgreSQL em:
+
+config/config.py
+
+## Execução
+### Iniciar o servidor
+python rede/server.py
+
+### Iniciar o cliente (interface gráfica)
+python main.py
+
+### Compilação (Executável)
+
+## Para gerar um executável único com suporte a recursos internos e Splash Screen:
+
+pyinstaller --noconfirm --onefile --windowed `
+--name "Chat a Bit" `
+--icon "assets/icone_gato.ico" `
+--splash "assets/icone_gato.png" `
+--add-data "assets;assets" `
+--add-data "banco_de_dados;banco_de_dados" `
+--add-data "config;config" `
+--add-data "interface;interface" `
+--add-data "rede;rede" `
+--add-data "utils;utils" `
+"main.py"
+
+
+O executável final será gerado na pasta dist/.
+
+
+### Autoria
+
+Desenvolvido por Ellen Rocha
+Engenharia da Computação – UFRPE
+
