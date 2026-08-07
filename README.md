@@ -89,15 +89,16 @@ pip install -r requirements.txt
 ```
 ## Configurar o banco de dados
 
+### Configure as credenciais do PostgreSQL em:
+```bash
+config/config.py
+```
+
 ### Execute o script de criação das tabelas:
 ```bash
 python -m banco_de_dados.criar_banco
 ```
 
-### Configure as credenciais do PostgreSQL em:
-```bash
-config/config.py
-```
 ## Execução
 ### Iniciar o servidor
 ```bash

@@ -1,7 +1,13 @@
+import sys
+import os
 import socket
 import threading
 import json
 from datetime import datetime
+
+# Adiciona o diretório raiz do projeto ao sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from banco_de_dados.database import listar_usuarios, salvar_mensagem_offline, carregar_mensagens_offline, salvar_mensagem_historico, carregar_historico_conversa
 
 HOST = 'localhost'

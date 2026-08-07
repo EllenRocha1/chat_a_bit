@@ -12,3 +12,6 @@ build/
 dist/
 *.spec
 _pyi_splash_*.py
+
+.vscode
+docs/
