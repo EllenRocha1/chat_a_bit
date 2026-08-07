@@ -2,6 +2,7 @@ import customtkinter as ctk
 from interface.login import criar_tela_login
 from utils.path import resource_path
 import os
+from utils.theme import set_theme
 
 if __name__ == "__main__":
     try:
@@ -10,7 +11,7 @@ if __name__ == "__main__":
     except ImportError:
         pass
 
-    ctk.set_appearance_mode("dark")
+    set_theme("dark") # Tema padrão ao iniciar
     app = ctk.CTk()
     app.title("Chat a Bit")
     app.geometry("500x600")
