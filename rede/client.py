@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from utils.mensagens import alerta_personalizado
 
-HOST = 'localhost'
+HOST = '127.0.0.1'
 PORT = 5000
 
 class ChatClient:

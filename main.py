@@ -3,6 +3,7 @@ from interface.login import criar_tela_login
 from utils.path import resource_path
 import os
 from utils.theme import set_theme
+from rede.server import iniciar_servidor_background
 
 if __name__ == "__main__":
     try:
@@ -10,6 +11,9 @@ if __name__ == "__main__":
         pyi_splash.close()
     except ImportError:
         pass
+
+    # Garante que o servidor de chat esteja rodando localmente
+    iniciar_servidor_background()
 
     set_theme("dark") # Tema padrão ao iniciar
     app = ctk.CTk()
